@@ -1,0 +1,168 @@
+##################MainActivity.java############################################################
+package com.example.a2;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+public class MainActivity<mainText, mainBtn> extends AppCompatActivity {
+    TextView mainText;
+    Button mainBtn1;
+    Button mainBtn2;
+    Button mainBtn3;
+    private long score = 0;
+    String s="";
+    ImageButton imageButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mainText = (TextView) findViewById(R.id.mainTxt);
+        mainBtn1 = (Button) findViewById(R.id.main_btn1);
+        mainBtn1.setOnClickListener(clickListener1);
+        mainBtn2 = (Button) findViewById(R.id.main_btn2);
+        mainBtn2.setOnClickListener(clickListener2);
+        mainBtn3 = (Button) findViewById(R.id.main_btn3);
+        mainBtn3.setOnClickListener(clickListener3);
+        imageButton=(ImageButton) findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(clickListener4);
+    }
+
+    View.OnClickListener clickListener1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            score ++;
+            String s="";
+            if (score%10==2 || score%10==3 || score%10==4){
+                s = "Кнопка нажата " + score + " раза";
+            }
+            else {
+                s = "Кнопка нажата " + score + " раз";
+            }
+            mainText.setText(s.toCharArray(),0, s.length());
+        }
+    };
+    View.OnClickListener clickListener2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            score --;
+            if (score%10==2 || score%10==3 || score%10==4){
+                s = "Кнопка нажата " + score + " раза";
+            }
+            else {
+                s = "Кнопка нажата " + score + " раз";
+            }
+            mainText.setText(s.toCharArray(),0, s.length());
+        }
+    };
+    View.OnClickListener clickListener3 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            score=0;
+            String s = "Кнопка нажата " + score + " раз";
+            mainText.setText(s.toCharArray(),0, s.length());
+        }
+    };
+    View.OnClickListener clickListener4 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            imageButton.setImageResource(R.drawable.icon);
+            score=score+3;
+            if (score%10==2 || score%10==3 || score%10==4){
+                s = "Кнопка нажата " + score + " раза";
+            }
+            else {
+                s = "Кнопка нажата " + score + " раз";
+            }
+            mainText.setText(s.toCharArray(),0, s.length());
+        }
+    };
+}
+##################activity_main.xml############################################################
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/mainTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Кнопка нажата N раз"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <Button
+        android:id="@+id/main_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="+1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/main_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_btn1"
+        app:layout_constraintVertical_bias="0.153" />
+
+    <Button
+        android:id="@+id/main_btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сбросить"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_btn2"
+        app:layout_constraintVertical_bias="0.24" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Нажми на меня"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainTxt"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_btn3"
+        app:layout_constraintVertical_bias="0.323"
+        app:srcCompat="@drawable/icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

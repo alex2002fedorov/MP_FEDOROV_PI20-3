@@ -1,0 +1,120 @@
+##################MainActivity.java##################
+
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+    TextView mainTextView;
+    Button mainButton;
+    EditText mainEditText;
+    ListView mainListView;
+    ArrayAdapter mArrayAdapter;
+    ArrayList mNameList = new ArrayList();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mainButton = findViewById(R.id.main_button);
+        mainButton.setOnClickListener(this);
+        mainTextView = findViewById(R.id.main_textview);
+        mainTextView.setText("Set in Java");
+        mainEditText = (EditText) findViewById(R.id.main_edittext);
+        mainListView = findViewById(R.id.main_listview);
+        mArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mNameList);
+        mainListView.setAdapter(mArrayAdapter);
+        mainListView.setOnItemClickListener(this);
+
+    }
+    @Override
+    public void onClick(View v){
+        mainTextView.setText("Button pressed!");
+        mainTextView.setText(mainEditText.getText().toString() + " is learning Android development!");
+        mNameList.add(mainEditText.getText().toString());
+        mArrayAdapter.notifyDataSetChanged();
+
+
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("omg android", position + ": " + mNameList.get(position));
+        mainTextView.setText(mNameList.get(position).toString() + " is learning Android development!");
+    }
+
+}
+
+##################activity_main.xml##################
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="129dp"
+        android:layout_height="79dp"
+        android:text="@string/greetings"
+        android:id="@+id/main_textview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"/>
+
+    <Button
+        android:id="@+id/main_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/button" />
+
+    <EditText
+        android:id="@+id/main_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/hint" />
+    <ListView
+        android:id="@+id/main_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
+
+##################strings.xml##################
+
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="greetings">Hello world!</string>
+    <string name="button">Update The TextView</string>
+    <string name="hint">A name</string>
+</resources>
+
