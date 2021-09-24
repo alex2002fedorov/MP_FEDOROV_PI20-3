@@ -1,0 +1,105 @@
+################## MainActivity.java ##################
+package com.example.a3;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    private Button button;
+    private TextView text1;
+    private EditText edittext;
+    int a = 0;
+    int b = 100;
+    int number1 = a + (int) (Math.random() * b);
+    String s;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        text1 = (TextView) findViewById(R.id.text1);
+        edittext = (EditText) findViewById(R.id.edittext);
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(clickListener1);
+    }
+    View.OnClickListener clickListener1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String a = edittext.getText().toString();
+            int q = Integer.parseInt(a);
+
+            if (q>number1){
+                s="Загаданное число меньше " + q + number1;
+            }
+            if (q<number1){
+                s="Загаданное число больше " + q + number1;
+            }
+            if (q==number1){
+                s="Ура, победа!";
+            }
+            edittext.getText().clear();
+            text1.setText(s.toCharArray(),0, s.length());
+
+        }
+    };
+}
+################# activity_main.xml ##################################
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Попробуйте угадать число от 1 до 100"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="203dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="291dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:text="Проверить значение"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text1"
+        app:layout_constraintVertical_bias="0.048" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="345dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Загадано новое число"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittext" />
+</androidx.constraintlayout.widget.ConstraintLayout>
