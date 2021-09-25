@@ -10,40 +10,150 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
-    private TextView text1;
+    private Button button,exit,one,two,three;
+    private TextView text1,text;
     private EditText edittext;
-    int a = 0;
-    int b = 100;
-    int number1 = a + (int) (Math.random() * b);
-    String s;
+    int number1 = (int) (Math.random() * 100);
+    int number2 = (int) (Math.random() * 50);
+    int number3 = (int) (Math.random() * 25);
+    int tek=1;
+    String s,w;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text1 = (TextView) findViewById(R.id.text1);
+        text = (TextView) findViewById(R.id.text);
         edittext = (EditText) findViewById(R.id.edittext);
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(clickListener1);
+        exit = (Button) findViewById(R.id.exit);
+        exit.setOnClickListener(clickListener2);
+        one = (Button) findViewById(R.id.one);
+        one.setOnClickListener(clickListener3);
+        two = (Button) findViewById(R.id.two);
+        two.setOnClickListener(clickListener4);
+        three = (Button) findViewById(R.id.three);
+        three.setOnClickListener(clickListener5);
     }
     View.OnClickListener clickListener1 = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String a = edittext.getText().toString();
-            int q = Integer.parseInt(a);
+            if (tek==3){
+                w="Попробуйте угадать число от 0 до 100";
+                text.setText(w.toCharArray(),0, w.length());
+                if (edittext.getText().length() > 0){
+                    String a = edittext.getText().toString();
+                    int q = Integer.parseInt(a);
+                    if (q<0 | q>100){
+                        s="Что-то не так с числом";
+                    }
+                    else if (q>number1){
+                        s="Загаданное число меньше ";
+                    }
+                    else if (q<number1){
+                        s="Загаданное число больше ";
+                    }
+                    else if (q==number1){
+                        s="Ура, победа!";
+                        number1 = (int) (Math.random() * 100);
+                    }
+                    edittext.getText().clear();
+                }
+                else {
+                    s="Введите число!!!";
+                }
+                text1.setText(s.toCharArray(),0, s.length());
+            }
+            else if (tek==1){
+                w="Попробуйте угадать число от 0 до 25";
+                text.setText(w.toCharArray(),0, w.length());
+                if (edittext.getText().length() > 0){
+                    String a = edittext.getText().toString();
+                    int q = Integer.parseInt(a);
+                    if (q<0 | q>25){
+                        s="Что-то не так с числом";
+                    }
+                    else if (q>number3){
+                        s="Загаданное число меньше ";
+                    }
+                    else if (q<number3){
+                        s="Загаданное число больше ";
+                    }
+                    else if (q==number3){
+                        s="Ура, победа!";
+                        number3 = (int) (Math.random() * 25);
+                    }
+                    edittext.getText().clear();
+                }
+                else {
+                    s="Введите число!!!";
+                }
+                text1.setText(s.toCharArray(),0, s.length());
+            }
+            else if (tek==2){
+                w="Попробуйте угадать число от 0 до 50";
+                text.setText(w.toCharArray(),0, w.length());
+                if (edittext.getText().length() > 0){
+                    String a = edittext.getText().toString();
+                    int q = Integer.parseInt(a);
+                    if (q<0 | q>50){
+                        s="Что-то не так с числом";
+                    }
+                    else if (q>number2){
+                        s="Загаданное число меньше ";
+                    }
+                    else if (q<number2){
+                        s="Загаданное число больше ";
+                    }
+                    else if (q==number2){
+                        s="Ура, победа!";
+                        number2 = (int) (Math.random() * 50);
+                    }
+                    edittext.getText().clear();
+                }
+                else {
+                    s="Введите число!!!";
+                }
+                text1.setText(s.toCharArray(),0, s.length());
+            }
+        }
+    };
 
-            if (q>number1){
-                s="Загаданное число меньше " + q + number1;
-            }
-            if (q<number1){
-                s="Загаданное число больше " + q + number1;
-            }
-            if (q==number1){
-                s="Ура, победа!";
-            }
-            edittext.getText().clear();
+    View.OnClickListener clickListener3 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            tek=1;
+            w="Попробуйте угадать число от 0 до 25";
+            text.setText(w.toCharArray(),0, w.length());
+            s="Загадано новое число";
             text1.setText(s.toCharArray(),0, s.length());
-
+        }
+    };
+    View.OnClickListener clickListener4 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            tek=2;
+            w="Попробуйте угадать число от 0 до 50";
+            text.setText(w.toCharArray(),0, w.length());
+            s="Загадано новое число";
+            text1.setText(s.toCharArray(),0, s.length());
+        }
+    };
+    View.OnClickListener clickListener5 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            tek=3;
+            w="Попробуйте угадать число от 0 до 100";
+            text.setText(w.toCharArray(),0, w.length());
+            s="Загадано новое число";
+            text1.setText(s.toCharArray(),0, s.length());
+        }
+    };
+    View.OnClickListener clickListener2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            System.exit(1);
         }
     };
 }
@@ -60,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Попробуйте угадать число от 1 до 100"
+        android:text="Попробуйте угадать число от 0 до 25"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -81,15 +191,15 @@ public class MainActivity extends AppCompatActivity {
 
     <Button
         android:id="@+id/button"
-        android:layout_width="291dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="408dp"
+        android:layout_height="45dp"
         android:text="Проверить значение"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text1"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.066" />
 
     <TextView
         android:id="@+id/text1"
@@ -102,4 +212,51 @@ public class MainActivity extends AppCompatActivity {
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выход"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/two"
+        app:layout_constraintVertical_bias="0.212" />
+
+    <Button
+        android:id="@+id/one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уровень 1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/two"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.063" />
+
+    <Button
+        android:id="@+id/two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уровень 2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <Button
+        android:id="@+id/three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уровень 3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.608"
+        app:layout_constraintStart_toEndOf="@+id/two"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.063" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
