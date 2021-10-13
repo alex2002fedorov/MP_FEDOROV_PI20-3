@@ -1,0 +1,299 @@
+##activity_main##
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:label="@string/app_name"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Справочное приложение по математике"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094" />
+
+    <Button
+        android:id="@+id/alg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Click"
+        android:text="Алгебра"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.291"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/geo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Геометрия"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.448"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выход"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Таблица квадратов двухзначных чисел"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.595" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+##MainActivity.java##
+package com.example.a404;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+    private Button alg,geo,exit,tab;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        alg = (Button) findViewById(R.id.alg);
+        alg.setOnClickListener(button1);
+        geo = (Button) findViewById(R.id.geo);
+        geo.setOnClickListener(button2);
+        tab = (Button) findViewById(R.id.tab);
+        tab.setOnClickListener(button4);
+        exit = (Button) findViewById(R.id.exit);
+        exit.setOnClickListener(button3);
+    };
+    View.OnClickListener button1 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent= new Intent(".alg");
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener button2 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent= new Intent(".geo");
+            startActivity(intent);
+        }
+    };
+    View.OnClickListener button4 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent= new Intent(".tab");
+            startActivity(intent);
+        }
+    };
+    View.OnClickListener button3 = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            System.exit(1);
+        }
+
+    };
+
+
+}
+##strings##
+<resources>
+    <string name="app_name">Математика</string>
+    <string name="alg">Алгебра</string>
+    <string name="geo">Геометрия</string>
+    <string name="tab">Таблица</string>
+</resources>
+##Manifest##
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.a404">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.404">
+        <activity
+            android:name=".tab"
+            android:exported="true"
+            android:label="@string/tab">
+            <intent-filter>
+                <action android:name=".tab" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".geo"
+            android:exported="true"
+            android:label="@string/geo">
+            <intent-filter>
+                <action android:name=".geo" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".alg"
+            android:exported="true"
+            android:label="@string/alg">
+            <intent-filter>
+                <action android:name=".alg" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+##activity_alg##
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:label="@string/alg">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="369dp"
+        android:layout_height="498dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.145"
+        app:srcCompat="@drawable/alg"
+        tools:layout_editor_absoluteX="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+##alg.java##
+package com.example.a404;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class alg extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_alg);
+    }
+}
+##activity_geo##
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".geo">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="358dp"
+        android:layout_height="507dp"
+        app:srcCompat="@drawable/geo"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="52dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+##geo.java##
+package com.example.a404;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class geo extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_geo);
+    }
+}
+##activity_tab##
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tab">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="376dp"
+        android:layout_height="194dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.106"
+        app:srcCompat="@drawable/tab"
+        tools:layout_editor_absoluteX="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+##tab.java##
+package com.example.a404;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class tab extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tab);
+    }
+}
